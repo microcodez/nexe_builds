@@ -16,10 +16,10 @@ fi
 if [ "$os_arch" = "x86_64" ]; then
   os_arch="x64"
 fi
-if [ "$os_arch" != "x64" ]; then
-  echo "Error! Unsupported architecture: $os_arch"
-  exit 1
-fi
+# if [ "$os_arch" != "x64" ]; then
+#   echo "Error! Unsupported architecture: $os_arch"
+#   exit 1
+# fi
 nexe_target="${os_arch}-$node_target"
 
 help_text="

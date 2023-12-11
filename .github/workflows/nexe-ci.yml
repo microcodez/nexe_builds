@@ -18,9 +18,15 @@ jobs:
         shell: bash
     strategy:
       matrix:
+        # config:
+        #     - { os: macos-latest, arch: x64, python-arch: x64, name: macos-latest }
+        #     - { os: ubuntu-latest, arch: x64, python-arch: x64, name: ubuntu-latest }
+        #     - { os: windows-2019, arch: x64, python-arch: x64, name: windows-latest }
+        #     - { os: windows-latest, arch: ia32, python-arch: x86, name: windows-latest-32 }
         # TODO: Bump to windows-latest once it can be solved how to install Python2
         # such that the Node.js build system can detect it.
-        os: [ubuntu-latest, windows-2019, macos-latest]
+        # os: [ubuntu-latest, windows-2019, macos-latest, macos-latest-large]
+        os: [macos-latest-large]
         node_version: ['20.10.0']
 
     steps:
