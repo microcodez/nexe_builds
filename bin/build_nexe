@@ -16,7 +16,7 @@ fi
 if [ "$os_arch" = "x86_64" ]; then
   os_arch="x64"
 fi
-if [ "$os_arch" != "x64" ]; then
+if [ "$os_arch" != "x64" && "$os_arch" != "arm64" ]; then
   echo "Error! Unsupported architecture: $os_arch"
   exit 1
 fi
