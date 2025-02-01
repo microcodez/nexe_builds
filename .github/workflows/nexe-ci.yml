@@ -20,19 +20,19 @@ jobs:
       matrix:
         # TODO: Bump to windows-latest once it can be solved how to install Python2
         # such that the Node.js build system can detect it.
-        os: [ubuntu-latest, windows-2019, macos-latest]
-        # node_version: ['20.10.0', '20.9.0', '20.12.2']
-        node_version: ['20.15.1']
+        os: [ubuntu-latest, windows-2022, macos-latest]
+        # node_version: ['20.10.0', '20.9.0', '20.12.2', '20.15.1']
+        node_version: ['22.13.1']
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Use Node.js from .nvmrc
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
       - name: Declare caches for build
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ~/.ccache/
@@ -73,7 +73,7 @@ jobs:
 
       # Upload artifact & asset
       - name: Upload build artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: steps.run_cd.outputs.build_occurred == 'true'
         with:
           name: ${{ steps.run_cd.outputs.release_name }}
