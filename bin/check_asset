@@ -24,9 +24,9 @@ const osNameMap = {
     'win32': 'windows',
 };
 const archNameMap = {
+    'arm64': 'arm64',
     'x64': 'x64',
     'x32': 'x86',
-    'arm64': 'arm64'
 };
 const osArch = os.arch();
 
@@ -94,6 +94,9 @@ async function main() {
             console.log(`Writing existing release ID (${existingRelease.id}) to file: RELEASE_ID`);
             const releaseIdPath = path.join(__dirname, '../RELEASE_ID');
             fs.writeFileSync(releaseIdPath, `${existingRelease.id}`);
+            console.log(`Writing existing release tag (${existingRelease.tag_name}) to file: RELEASE_TAG`);
+            const releaseTagPath = path.join(__dirname, '../RELEASE_TAG');
+            fs.writeFileSync(releaseTagPath, `${existingRelease.tag_name}`);
             const releaseAssetsNames = existingRelease.assets.map((x) => x.name);
             console.log(`Existing assets for release ${packageData.version}:`, releaseAssetsNames);
             const existingAsset = releaseAssetsNames.includes(nexeAssetName);
@@ -108,6 +111,7 @@ async function main() {
             }
         } else {
             let releaseId = 'none'; // Default to none unless release is created
+            let releaseTag = 'none'; // Default to none unless release is created
 
             console.log(`No existing release version '${packageData.version}' found.`);
             console.log(`Creating release '${packageData.version}' ...`)
@@ -126,13 +130,18 @@ async function main() {
                 console.log('Release created.');
                 console.log(createResponse);
                 releaseId = createResponse.data.id;
+                releaseTag = createResponse.data.tag_name;
             } else {
                 console.log('Skipping creating release due to --no-create-release flag.');
             }
 
+            console.log(`Writing new release tag (${releaseTag}) to file: RELEASE_TAG`);
+            const releaseTagPath = path.join(__dirname, '../RELEASE_TAG');
+            fs.writeFileSync(releaseTagPath, releaseTag);
+
             console.log(`Writing new release ID (${releaseId}) to file: RELEASE_ID`);
             const releaseIdPath = path.join(__dirname, '../RELEASE_ID');
-            fs.writeFileSync(releaseIdPath, 'none');
+            fs.writeFileSync(releaseIdPath, releaseId);
 
             console.log(`Build needed! Exiting with error code 10.`);
             process.exit(10);
@@ -149,7 +158,7 @@ function genAssetData(release, targetOs) {
     // GET /repos/:owner/:repo/releases/assets/:asset_id
     // https://api.github.com/repos/$1/releases/latest
     return {
-        owner: "microcodez",
+        owner: "urbdyn",
         repo: "nexe_builds",
         artifactRegex: `^${targetOs}-.*`,
         release
