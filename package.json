@@ -23,6 +23,6 @@
   "homepage": "https://github.com/microcodez/nexe_builds#readme",
   "dependencies": {
     "@octokit/request": "^6.2.3",
-    "nexe": "^4.0.0-rc.6"
+    "nexe": "^5.0.0-beta.4"
   }
 }
