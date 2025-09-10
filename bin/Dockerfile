@@ -1,11 +1,5 @@
-FROM ubuntu:latest
+# ghcr.io/urbdyn/rockylinux9-builder from 2025-03-03
+FROM ghcr.io/urbdyn/rockylinux9-builder@sha256:f8394a5fffb5bf998ca4105b8552cdf2d3ff6c797d2afc280c348fdbd470ecb6
 
-RUN apt -qq update
-
-RUN apt -y -qq install software-properties-common
-RUN add-apt-repository ppa:deadsnakes/ppa -y -qq
-RUN apt -y -qq install g++ make ccache python3.8
-
-# python3-distutils python3-apt python2 python3 python3-pip
-
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash && \
+    mkdir -p /nexe_build/
