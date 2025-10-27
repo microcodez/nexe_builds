@@ -16,6 +16,7 @@
   * Node version: `22.14.0` (added on 14/04/2025)
   * Node version: `22.16.0` (added on 05/06/2025)
   * Node version: `22.20.0` (added on 14/10/2025)
+  * Node version: `22.21.0` (added on 27/10/2025)
 
 ## 0.3.0 and below
 
